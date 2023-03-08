@@ -5,4 +5,3 @@ from .models import *
 
 admin.site.register(Elfbar)
 admin.site.register(Taste)
-admin.site.register(Charge)

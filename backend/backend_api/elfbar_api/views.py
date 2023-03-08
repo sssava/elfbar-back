@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics
 from rest_framework.filters import OrderingFilter
-
+from django_filters.rest_framework import DjangoFilterBackend
 from .models import *
 from .serializers import *
 
@@ -11,8 +11,10 @@ from .serializers import *
 class ElfbarList(generics.ListAPIView):
     queryset = Elfbar.objects.all()
     serializer_class = ElfbarSerializer
-    filter_backends = [OrderingFilter]
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+    filterset_fields = ['charge']
     ordering_fields = ['price']
+
 
 
 class ElfbarGet(generics.RetrieveAPIView):

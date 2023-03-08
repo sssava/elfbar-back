@@ -8,15 +8,8 @@ class TasteSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class ChargeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Charge
-        fields = '__all__'
-
-
 class ElfbarSerializer(serializers.ModelSerializer):
     taste = TasteSerializer(many=False)
-    charge = ChargeSerializer(many=False)
 
     class Meta:
         model = Elfbar
