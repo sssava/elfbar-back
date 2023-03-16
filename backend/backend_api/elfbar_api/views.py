@@ -16,7 +16,6 @@ class ElfbarList(generics.ListAPIView):
     ordering_fields = ['price']
 
 
-
 class ElfbarGet(generics.RetrieveAPIView):
     queryset = Elfbar.objects.all()
     serializer_class = ElfbarSerializer
@@ -24,3 +23,12 @@ class ElfbarGet(generics.RetrieveAPIView):
     def get_object(self):
         slug = self.kwargs.get('slug')
         return Elfbar.objects.get(slug=slug)
+
+
+class ElfbarGetTastes(generics.ListAPIView):
+    queryset = Elfbar.objects.all()
+    serializer_class = ElfbarSerializer
+
+    def get_object(self):
+        charge = self.kwargs.get('charge')
+        return Elfbar.objects.filter(charge=charge)
