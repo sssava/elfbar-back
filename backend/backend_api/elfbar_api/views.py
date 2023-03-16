@@ -29,6 +29,6 @@ class ElfbarGetTastes(generics.ListAPIView):
     queryset = Elfbar.objects.all()
     serializer_class = ElfbarSerializer
 
-    def get_object(self):
+    def get_queryset(self):
         charge = self.kwargs.get('charge')
         return Elfbar.objects.filter(charge=charge)
