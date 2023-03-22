@@ -32,3 +32,13 @@ class ElfbarGetTastes(generics.ListAPIView):
     def get_queryset(self):
         charge = self.kwargs.get('charge')
         return Elfbar.objects.filter(charge=charge)
+
+
+class CreateOrder(generics.ListCreateAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+
+
+class CreateOrderItem(generics.ListCreateAPIView):
+    queryset = OrderItem.objects.all()
+    serializer_class = OrderItemSerializer
