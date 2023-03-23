@@ -34,11 +34,12 @@ class ElfbarGetTastes(generics.ListAPIView):
         return Elfbar.objects.filter(charge=charge)
 
 
-class CreateOrder(generics.ListCreateAPIView):
+class CreateOrder(generics.CreateAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
+    
 
-
-class CreateOrderItem(generics.ListCreateAPIView):
+class CreateOrderItem(generics.CreateAPIView):
     queryset = OrderItem.objects.all()
     serializer_class = OrderItemSerializer
+

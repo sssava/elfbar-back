@@ -28,14 +28,13 @@ class Elfbar(models.Model):
         return self.name
 
 
+class Order(models.Model):
+    name = models.CharField(max_length=100)
+    postal_code = models.IntegerField()
+
+
 class OrderItem(models.Model):
     elfbar = models.CharField(max_length=250, null=True)
     price = models.IntegerField(default=0, null=True)
     quantity = models.IntegerField()
-
-
-class Order(models.Model):
-    order_item = models.ManyToManyField(OrderItem)
-    name = models.CharField(max_length=100)
-    postal_code = models.IntegerField()
-
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name="order_items")

@@ -17,14 +17,23 @@ class ElfbarSerializer(serializers.ModelSerializer):
 
 
 class OrderItemSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = OrderItem
-        fields = '__all__'
+        fields = ['elfbar', 'price', 'quantity']
 
 
 class OrderSerializer(serializers.ModelSerializer):
-    order_item = OrderItemSerializer(many=True)
+    order_items = OrderItemSerializer(many=True)
 
     class Meta:
         model = Order
-        fields = '__all__'
+        fields = ['name', 'postal_code', 'order_items']
+
+    def create(self, validated_data):
+        order_item_data = validated_data.pop('order_items')
+        order = Order.objects.create(**validated_data)
+
+        for order_data in order_item_data:
+            OrderItem.objects.create(order=order, **order_data)
+        return order
