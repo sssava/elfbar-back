@@ -30,11 +30,17 @@ class Elfbar(models.Model):
 
 class Order(models.Model):
     name = models.CharField(max_length=100)
+    surname = models.CharField(max_length=100)
     postal_code = models.IntegerField()
+
+    def __str__(self):
+        return f"{self.name}, {self.surname}, {self.postal_code}"
 
 
 class OrderItem(models.Model):
-    elfbar = models.CharField(max_length=250, null=True)
-    price = models.IntegerField(default=0, null=True)
+    elfbar = models.ForeignKey(Elfbar, on_delete=models.CASCADE, related_name="elfbar")
     quantity = models.IntegerField()
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name="order_items")
+
+    def __str__(self):
+        return f"Postal Code: {self.order.postal_code}, Elfbar: {self.elfbar.name}, Quantity: {self.quantity}"
