@@ -13,7 +13,7 @@ class ElfbarList(generics.ListAPIView):
     serializer_class = ElfbarSerializer
     filter_backends = [DjangoFilterBackend, OrderingFilter]
     filterset_fields = ['charge']
-    ordering_fields = ['price']
+    ordering_fields = ['price', 'taste__count_in_stock']
 
 
 class ElfbarGet(generics.RetrieveAPIView):
