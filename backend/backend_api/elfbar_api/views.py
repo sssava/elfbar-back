@@ -43,3 +43,13 @@ class CreateOrderItem(generics.CreateAPIView):
     queryset = OrderItem.objects.all()
     serializer_class = OrderItemSerializer
 
+
+class UpdateTastes(generics.UpdateAPIView):
+    queryset = Taste.objects.all()
+    serializer_class = TasteSerializer
+
+    def get_object(self):
+        pk = self.kwargs.get("pk")
+        return Taste.objects.get(pk=pk)
+
+

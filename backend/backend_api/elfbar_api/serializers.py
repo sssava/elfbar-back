@@ -7,6 +7,13 @@ class TasteSerializer(serializers.ModelSerializer):
         model = Taste
         fields = '__all__'
 
+    def update(self, instance, validated_data):
+        instance.name = validated_data.get("name", instance.name)
+        instance.count_in_stock = validated_data.get("count_in_stock", instance.count_in_stock)
+        instance.slug = validated_data.get("slug", instance.slug)
+        instance.save()
+        return instance
+
 
 class ElfbarSerializer(serializers.ModelSerializer):
     taste = TasteSerializer(many=False)
